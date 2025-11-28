@@ -287,14 +287,13 @@ The result should display the EmpID, EmpName, and separate columns for each city
 (Mathura, Pune, Delhi), containing the corresponding total salary.
 */
  
-SELECT
- EmpID,
- EmpName,
- SUM(CASE WHEN City = 'Mathura' THEN Salary END) AS "Mathura",
- SUM(CASE WHEN City = 'Pune' THEN Salary END) AS "Pune",
- SUM(CASE WHEN City = 'Delhi' THEN Salary END) AS "Delhi"
- FROM Employee
- GROUP BY EmpID, EmpName;
+SELECT EmpID, EmpName,
+SUM(CASE WHEN City = 'Mathura' THEN Salary END) AS "Mathura",
+SUM(CASE WHEN City = 'Pune' THEN Salary END) AS "Pune",
+SUM(CASE WHEN City = 'Delhi' THEN Salary END) AS "Delhi",
+SUM(CASE WHEN City = 'Bangalore' THEN Salary END) AS "Bangalore"
+FROM Employee
+GROUP BY City;
  
  
  

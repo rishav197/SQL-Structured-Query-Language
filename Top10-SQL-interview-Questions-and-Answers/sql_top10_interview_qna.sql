@@ -223,11 +223,13 @@ SELECT EmpID, EmpName, gender, Salary, city,
  
  
  -- To Delete duplicate records
- DELETE FROM Employee
- WHERE EmpID IN (SELECT EmpID FROM Employee
- GROUP BY EmpID
- HAVING COUNT(*) > 1);
-
+WITH CTE AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY EmpID ORDER BY EmpID) AS rn
+    FROM Employee
+)
+DELETE FROM CTE
+WHERE rn > 1;
     
 -- Q7(b): Query to retrieve the list of employees working in same project.
 WITH CTE AS 
